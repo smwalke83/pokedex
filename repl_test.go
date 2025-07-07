@@ -23,7 +23,7 @@ func TestCleanInput(t *testing.T) {
 		},
 	}
 	for _, c := range cases {
-		actual := CleanInput(c.input)
+		actual := cleanInput(c.input)
 		if len(actual) != len(c.expected) {
 			t.Errorf("Error - Slice Lengths Don't Match: Actual - %d vs Expected - %d", len(actual), len(c.expected))
 		}
