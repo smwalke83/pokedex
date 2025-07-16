@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"encoding/json"
 	"io"
+	"errors"
 	"github.com/smwalke83/pokedex/internal/pokecache"
 )
 
@@ -269,9 +270,12 @@ func getLocationsb(c *Config, cache *pokecache.Cache) (*Config, error) {
 }
 
 func commandExplore(c *Config, cache *pokecache.Cache, s string) (*Config, error) {
+	if len(s) == 0 {
+		err := errors.New("You must provide a location parameter.")
+		return c, err
+	}
 	loc, err := getLocData(c, cache, s)
 	if err != nil {
-		fmt.Printf("Error: %v\n", err)
 		return c, err
 	}
 	for _, result := range loc.PokemonEncounters {
